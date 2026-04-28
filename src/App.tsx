@@ -3,6 +3,7 @@ import { TranslationProvider } from './i18n/context';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import LanguageModal from './components/LanguageModal';
 import Home from './pages/Home';
 import BecomeDriver from './pages/BecomeDriver';
 import Contact from './pages/Contact';
@@ -20,6 +21,7 @@ function AppContent() {
       <ScrollRestoration />
       <ThemeProvider>
         <TranslationProvider>
+          <LanguageModal />
           <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 flex flex-col">
             <Header />
             <main className="flex-1">
