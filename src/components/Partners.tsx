@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Building2, Car, TrendingUp, Users } from 'lucide-react';
+import { Building2, Car, TrendingUp, Users, ArrowRight } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
 import { useTranslation } from '../i18n/context';
 
@@ -140,13 +140,26 @@ export default function Partners() {
               ))
             ) : loadingVehicles ? (
               <div className="col-span-full text-center py-12">
-                <Car className="mx-auto text-gray-400 dark:text-gray-500 mb-4" size={64} />
-                <p className="text-gray-500 dark:text-gray-400">{t('partners.loading')}</p>
+                <div className="inline-block">
+                  <div className="w-12 h-12 rounded-full border-4 border-gray-300 border-t-emerald-500 animate-spin"></div>
+                </div>
+                <p className="text-gray-500 dark:text-gray-400 mt-4">{t('partners.loading')}</p>
               </div>
             ) : vehiclesError ? (
-              <div className="col-span-full text-center py-12">
-                <Car className="mx-auto text-red-400 dark:text-red-400 mb-4" size={64} />
-                <p className="text-red-600 dark:text-red-400">{vehiclesError}</p>
+              <div className="col-span-full">
+                <div className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl border border-emerald-200 dark:border-emerald-800 p-12 text-center">
+                  <div className="mb-4">
+                    <Car className="mx-auto text-emerald-600 dark:text-emerald-400" size={64} />
+                  </div>
+                  <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Catalogue en cours de configuration</h4>
+                  <p className="text-gray-600 dark:text-gray-300 max-w-md mx-auto mb-6">
+                    Notre sélection de véhicules sera bientôt disponible. Contactez-nous pour connaître les dernières offres.
+                  </p>
+                  <a href="/#contact" className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    Nous contacter
+                    <ArrowRight size={18} />
+                  </a>
+                </div>
               </div>
             ) : (
               <div className="col-span-full text-center py-12">
