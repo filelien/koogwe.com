@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, ScrollRestoration } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { TranslationProvider } from './i18n/context';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
@@ -13,7 +13,6 @@ import Legal from './pages/Legal';
 function App() {
   return (
     <Router>
-      <ScrollRestoration />
       <ThemeProvider>
         <TranslationProvider>
           <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 flex flex-col">
