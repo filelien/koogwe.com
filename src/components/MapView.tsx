@@ -1,164 +1,102 @@
+import { MapContainer, TileLayer, Marker, Popup, Tooltip, useMap } from 'react-leaflet';
+import { divIcon } from 'leaflet';
 import { useEffect, useRef, useState } from 'react';
-import { MapPin } from 'lucide-react';
+import 'leaflet/dist/leaflet.css';
 
 interface MapViewProps {
   selectedCity?: string;
 }
 
-const cityCoordinates: Record<string, { coords: [number, number]; name: string; region: string }> = {
-  Cayenne: { coords: [-52.3333, 4.9375], name: 'Cayenne', region: 'Chef-lieu' },
-  Kourou: { coords: [-52.65, 5.16], name: 'Kourou', region: 'Littoral nord' },
-  'Saint-Laurent-du-Maroni': { coords: [-54.0333, 5.5], name: 'Saint-Laurent-du-Maroni', region: 'Littoral ouest' },
-  Matoury: { coords: [-52.3333, 4.85], name: 'Matoury', region: 'Aire métropolitaine' },
-  'Remire-Montjoly': { coords: [-52.2667, 4.9], name: 'Remire-Montjoly', region: 'Région côtière' },
+const cityCoordinates: Record<string, { center: [number, number]; name: string; region: string }> = {
+  Cayenne: { center: [4.9333, -52.3333], name: 'Cayenne', region: 'Chef-lieu' },
+  Kourou: { center: [5.1556, -52.6475], name: 'Kourou', region: 'Littoral nord' },
+  'Saint-Laurent-du-Maroni': { center: [5.5058, -54.0286], name: 'Saint-Laurent-du-Maroni', region: 'Littoral ouest' },
+  Matoury: { center: [4.8486, -52.3250], name: 'Matoury', region: 'Aire métropolitaine' },
+  'Remire-Montjoly': { center: [4.9167, -52.2667], name: 'Remire-Montjoly', region: 'Région côtière' },
 };
 
-type MapHandle = {
-  remove?: () => void;
-  flyTo?: (opts: { center: [number, number]; zoom: number; duration?: number }) => void;
-  setCenter?: (opts: { lat: number; lng: number }) => void;
-  setZoom?: (zoom: number) => void;
-};
+const GUYANA_CENTER: [number, number] = [5.0, -53.0];
+const OVERVIEW_ZOOM = 8;
+const CITY_ZOOM = 13;
 
-type MapboxMapCtor = new (options: {
-  container: HTMLDivElement;
-  style: string;
-  center: [number, number];
-  zoom: number;
-}) => MapHandle;
+// Custom marker icon for cities
+const createMarkerIcon = (isActive: boolean = false) => divIcon({
+  html: `<div style="background-color: ${isActive ? '#059669' : '#10B981'}; border: ${isActive ? '4px' : '3px'} solid ${isActive ? '#047857' : '#059669'}; width: ${isActive ? '36px' : '28px'}; height: ${isActive ? '36px' : '28px'}; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: ${isActive ? '0 4px 12px rgba(0,0,0,0.35)' : '0 2px 8px rgba(0,0,0,0.25)'}; cursor: pointer; transition: all 0.3s;"><div style="width: 10px; height: 10px; background-color: white; border-radius: 50%;"></div></div>`,
+  className: '',
+  iconSize: [isActive ? 36 : 28, isActive ? 36 : 28],
+  iconAnchor: [isActive ? 18 : 14, isActive ? 18 : 14],
+});
 
-type MapboxMarkerCtor = new (options: { color: string; scale?: number }) => {
-  setLngLat: (coords: [number, number]) => { addTo: (map: MapHandle) => void };
-  setPopup?: (popup: any) => MapboxMarkerCtor;
-};
-
-type BrowserMapsWindow = Window & {
-  mapboxgl?: { 
-    accessToken: string; 
-    Map: MapboxMapCtor; 
-    Marker: MapboxMarkerCtor;
-    Popup?: new (options?: any) => any;
-  };
-};
-
-export default function MapView({ selectedCity = 'Cayenne' }: MapViewProps) {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const mapInstance = useRef<MapHandle | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const mapboxToken = import.meta.env.VITE_MAPBOX_TOKEN;
+function MapController({ activeCity }: { activeCity: string }) {
+  const map = useMap();
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (!mapContainer.current) return;
-
-    const initMap = () => {
-      const mapsWindow = window as BrowserMapsWindow;
-      
-      if (!mapsWindow.mapboxgl) {
-        setIsLoading(false);
-        return;
-      }
-
-      // Get city data
-      const cityData = cityCoordinates[selectedCity] || cityCoordinates['Cayenne'];
-      const coordinates = cityData.coords;
-
-      // Set token if provided
-      if (mapboxToken) {
-        mapsWindow.mapboxgl.accessToken = mapboxToken;
-      } else {
-        // If no token, we'll show a fallback UI
-        setIsLoading(false);
-        return;
-      }
-
-      try {
-        if (!mapInstance.current) {
-          mapInstance.current = new mapsWindow.mapboxgl.Map({
-            container: mapContainer.current!,
-            style: 'mapbox://styles/mapbox/outdoors-v12',
-            center: coordinates,
-            zoom: 12,
-          });
-
-          // Add marker with popup
-          const markerEl = document.createElement('div');
-          markerEl.className = 'marker';
-          markerEl.style.backgroundImage = `url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%2310b981" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="white"/></svg>')`;
-          markerEl.style.backgroundSize = 'contain';
-          markerEl.style.width = '40px';
-          markerEl.style.height = '40px';
-          markerEl.style.cursor = 'pointer';
-          markerEl.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))';
-
-          new mapsWindow.mapboxgl.Marker({ element: markerEl } as any)
-            .setLngLat(coordinates)
-            .addTo(mapInstance.current);
-        } else {
-          mapInstance.current.flyTo({
-            center: coordinates,
-            zoom: 12,
-            duration: 1000,
-          });
-        }
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Erreur lors de l\'initialisation de la carte:', error);
-        setIsLoading(false);
-      }
-    };
-
-    // Check if mapboxgl is already loaded
-    if ((window as BrowserMapsWindow).mapboxgl) {
-      initMap();
-    } else {
-      // Wait a bit for the script to load
-      const timer = setTimeout(initMap, 100);
-      return () => clearTimeout(timer);
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
     }
+    const cityData = cityCoordinates[activeCity];
+    if (cityData) {
+      map.setView(cityData.center, CITY_ZOOM, { animate: true });
+    }
+  }, [activeCity, map]);
 
-    return () => {
-      if (mapInstance.current) {
-        mapInstance.current.remove?.();
-        mapInstance.current = null;
-      }
-    };
-  }, [selectedCity, mapboxToken]);
+  return null;
+}
 
-  const cityData = cityCoordinates[selectedCity] || cityCoordinates['Cayenne'];
+export default function MapView({ selectedCity = 'Cayenne' }: MapViewProps) {
+  const [activeCity, setActiveCity] = useState(selectedCity);
+
+  useEffect(() => {
+    setActiveCity(selectedCity);
+  }, [selectedCity]);
+
+  const handleCityClick = (cityName: string) => {
+    setActiveCity(cityName);
+  };
 
   return (
     <div className="w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-xl">
-      <div className="relative w-full h-96">
-        {!mapboxToken ? (
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center z-10">
-            <div className="text-center">
-              <MapPin className="mx-auto text-gray-400 dark:text-gray-500 mb-3" size={48} />
-              <p className="text-gray-600 dark:text-gray-300 text-sm">Configurez VITE_MAPBOX_TOKEN pour afficher la carte</p>
-            </div>
-          </div>
-        ) : isLoading ? (
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center z-10">
-            <div className="text-center">
-              <div className="w-12 h-12 rounded-full border-4 border-gray-300 border-t-emerald-500 animate-spin mx-auto mb-3"></div>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">Chargement de la carte...</p>
-            </div>
-          </div>
-        ) : null}
-        <div ref={mapContainer} className="w-full h-full bg-gray-100 dark:bg-gray-800" />
-      </div>
-
-      {/* City Info Card */}
-      <div className="bg-white dark:bg-gray-800 px-6 py-4 border-t border-gray-200 dark:border-gray-700">
-        <div className="flex items-start gap-3">
-          <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg flex-shrink-0">
-            <MapPin className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-          </div>
-          <div className="flex-1">
-            <h3 className="font-semibold text-gray-900 dark:text-white text-lg">{cityData.name}</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">{cityData.region}</p>
-          </div>
-        </div>
+      <div className="w-full h-[500px] rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-blue-50">
+        <MapContainer
+          center={GUYANA_CENTER}
+          zoom={OVERVIEW_ZOOM}
+          scrollWheelZoom={false}
+          className="w-full h-full"
+        >
+          <MapController activeCity={activeCity} />
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {Object.values(cityCoordinates).map((city) => (
+            <Marker
+              key={city.name}
+              position={city.center}
+              icon={createMarkerIcon(activeCity === city.name)}
+              eventHandlers={{
+                click: () => handleCityClick(city.name),
+              }}
+            >
+              <Tooltip 
+                direction="right" 
+                offset={[16, 0]} 
+                permanent
+                className="leaflet-tooltip-custom"
+                sticky={false}
+              >
+                <span className="font-bold text-sm text-gray-800">{city.name}</span>
+              </Tooltip>
+              <Popup className="leaflet-popup-custom">
+                <div className="rounded-lg p-3 text-center">
+                  <p className="font-bold text-gray-900 text-sm">{city.name}</p>
+                  <p className="text-xs text-gray-600">{city.region}</p>
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
       </div>
     </div>
   );

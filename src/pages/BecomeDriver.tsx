@@ -93,7 +93,7 @@ const BecomeDriver: React.FC = () => (
           <li>Contactez notre équipe support pour démarrer votre inscription :</li>
         </ol>
         <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-lg p-6 mb-6">
-          <p className="mb-2"><strong>Email :</strong> <a href="mailto:contact@koogwe.com" className="text-emerald-600 dark:text-emerald-400 underline hover:text-emerald-700">contact@koogwe.com</a></p>
+          <p className="mb-2"><strong>Email :</strong> <a href="mailto:support@lotovtc.fr" className="text-emerald-600 dark:text-emerald-400 underline hover:text-emerald-700">support@lotovtc.fr</a></p>
           <p className="mb-2"><strong>Objet :</strong> Indiquez "Candidature chauffeur VTC"</p>
           <p className="mb-2"><strong>Pièces jointes :</strong> Joignez vos documents (carte VTC, permis, assurance) en PDF</p>
           <p><strong>Délai :</strong> Réponse sous 48h ouvrées</p>

@@ -17,14 +17,32 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 via-teal-700 to-cyan-800">
-        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/258510/pexels-photo-258510.jpeg?auto=compress&cs=tinysrgb&w=1920')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 via-teal-700 to-cyan-800" />
+
+      <div className="absolute inset-0 pointer-events-none">
+        <svg viewBox="0 0 640 420" className="absolute left-0 top-1/2 w-[48rem] -translate-y-1/2 opacity-15 text-white" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="16">
+          <defs>
+            <pattern id="tembePattern" width="128" height="128" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect width="128" height="128" fill="currentColor" fillOpacity="0.04" />
+              <path d="M0 64 L64 0 L128 64 L64 128 Z" stroke="currentColor" strokeWidth="18" strokeOpacity="0.08" fill="none" />
+            </pattern>
+          </defs>
+          <rect width="640" height="420" fill="url(#tembePattern)" />
+          <circle cx="320" cy="210" r="84" fill="currentColor" fillOpacity="0.06" />
+          <path d="M104 88 L536 88 L536 112 L104 112 Z M104 168 L536 168 L536 192 L104 192 Z M104 248 L536 248 L536 272 L104 272 Z" fill="currentColor" fillOpacity="0.05" />
+        </svg>
+
+        <svg viewBox="0 0 140 520" className="absolute right-[-5rem] top-[8%] h-[44rem] w-[14rem] opacity-18 text-white rotate-[10deg]" aria-hidden="true" fill="currentColor">
+          <path d="M68 0 H72 V280 C88 300 90 330 72 352 C56 372 32 372 18 352 C-2 326 4 292 22 276 V520 H52 V276 C70 292 76 326 58 352 C42 372 18 372 2 352 C-16 330 -14 300 2 280 V0 Z" fillOpacity="0.12" />
+          <path d="M70 24 C60 24 54 32 54 44 C54 56 60 64 70 64 C80 64 86 56 86 44 C86 32 80 24 70 24 Z" fillOpacity="0.2" />
+          <path d="M46 180 C36 180 30 192 30 204 C30 216 36 228 46 228 C56 228 62 216 62 204 C62 192 56 180 46 180 Z" fillOpacity="0.15" />
+        </svg>
       </div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-        <div className="animate-fade-in">
+        <div>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
             {t('hero.title')}
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-cyan-300">
@@ -102,11 +120,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center p-1">
-          <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-        </div>
-      </div>
 
       <TripSimulationModal
         isOpen={isModalOpen}

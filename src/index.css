@@ -24,6 +24,26 @@
   }
 }
 
+@layer components {
+  .leaflet-tooltip-custom {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid #10B981 !important;
+    border-radius: 8px !important;
+    padding: 4px 10px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    font-weight: 600 !important;
+  }
+
+  .leaflet-tooltip-custom::before {
+    border-right-color: #10B981 !important;
+  }
+
+  .leaflet-popup-custom .leaflet-popup-content-wrapper {
+    border-radius: 12px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
 @layer utilities {
   .animate-fade-in {
     animation: fadeIn 1s ease-in-out;
