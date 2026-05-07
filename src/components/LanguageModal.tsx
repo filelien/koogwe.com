@@ -4,7 +4,7 @@ import { useTranslation } from '../i18n/context';
 import { languages, Language } from '../i18n/translations';
 
 export default function LanguageModal() {
-  const { language, setLanguage } = useTranslation();
+  const { setLanguage } = useTranslation();
   const [isFirstVisit, setIsFirstVisit] = useState(false);
 
   useEffect(() => {
