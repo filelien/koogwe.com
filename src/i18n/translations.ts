@@ -115,9 +115,10 @@ export const translations = {
       paddle: 'Pagaie traditionnelle',
       paddleDesc: 'Une référence discrète à l’histoire fluviale et à la navigation locale.',
       landscape: 'Paysage guyanais',
+      landscapeDesc: 'Littoral guyanais avec cocotiers et océan Atlantique. Un reflet du patrimoine naturel de la Guyane française.',
       roadSign: 'Panneau de route guyanais',
-      photoCaption: 'Illustration culturelle inspirée de la Guyane française.',
-      photoText: 'Un visuel calme et authentique pour ancrer KOOGWE dans son territoire.',
+      roadSignDesc: 'Signalisation routière locale représentant l\'infrastructure et l\'identité des routes guyanaises.',
+      photoCaption: 'KOOGWE célèbre les traditions et le patrimoine culturel de la Guyane française.',
     },
     download: {
       badge: 'Téléchargement',

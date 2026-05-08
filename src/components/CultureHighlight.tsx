@@ -52,7 +52,7 @@ export default function CultureHighlight() {
               <div className="relative">
                 <img
                   src="/images/guyana-tembe.jpg"
-                  alt="Motifs colorés tembé - Art traditionnel guyanais"
+                  alt={t('culture.tembeDesc')}
                   className="w-full h-64 object-cover"
                   loading="lazy"
                   onError={(event) => onImageFallback(event, fallbackImages.tembe)}
@@ -68,7 +68,7 @@ export default function CultureHighlight() {
               <div className="p-5 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/20 flex items-center justify-between">
                 <div>
                   <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">{t('culture.tembe')}</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Motifs créole guyanais</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{t('culture.tembeDesc')}</p>
                 </div>
                 <button
                   onClick={() => downloadImage('/images/guyana-tembe.jpg', 'art-tembe-guyanais.jpg')}
@@ -79,6 +79,7 @@ export default function CultureHighlight() {
                 </button>
               </div>
             </div>
+
 
             {/* Guyane Stats Section */}
             <div className="rounded-3xl bg-gradient-to-br from-emerald-600 to-teal-700 p-6 shadow-xl text-white">
@@ -109,45 +110,45 @@ export default function CultureHighlight() {
           </div>
 
           <div className="grid gap-4">
-            {/* Pagaie décorative - small card */}
+            {/* Signalisation locale - maintenant en haut */}
             <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg group">
               <div className="relative">
                 <img
-                  src="/images/guyana-paddle.jpg"
-                  alt="Pagaie traditionnelle peinte - Artisanat guyanais"
+                  src="/images/guyana-road-sign.jpg"
+                  alt={t('culture.roadSign')}
                   className="w-full h-40 object-cover"
                   loading="lazy"
-                  onError={(event) => onImageFallback(event, fallbackImages.paddle)}
+                  onError={(event) => onImageFallback(event, fallbackImages.roadSign)}
                 />
                 <button
-                  onClick={() => downloadImage('/images/guyana-paddle.jpg', 'pagaie-traditionnelle-guyane.jpg')}
+                  onClick={() => downloadImage('/images/guyana-road-sign.jpg', 'panneau-routier-guyane.jpg')}
                   className="absolute top-3 right-3 p-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-lg shadow-md hover:bg-white dark:hover:bg-gray-800 transition-all opacity-0 group-hover:opacity-100"
                   title="Télécharger l'image"
                 >
-                  <Download size={16} className="text-amber-600 dark:text-amber-400" />
+                  <Download size={16} className="text-green-600 dark:text-green-400" />
                 </button>
               </div>
-              <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 flex items-center justify-between">
+              <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('culture.paddle')}</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Artisanat fluvial traditionnel</p>
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('culture.roadSign')}</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{t('culture.roadSignDesc')}</p>
                 </div>
                 <button
-                  onClick={() => downloadImage('/images/guyana-paddle.jpg', 'pagaie-traditionnelle-guyane.jpg')}
-                  className="p-1.5 hover:bg-amber-200 dark:hover:bg-amber-800 rounded-lg transition-colors"
+                  onClick={() => downloadImage('/images/guyana-road-sign.jpg', 'panneau-routier-guyane.jpg')}
+                  className="p-1.5 hover:bg-green-200 dark:hover:bg-green-800 rounded-lg transition-colors"
                   title="Télécharger"
                 >
-                  <Download size={14} className="text-amber-600 dark:text-amber-400" />
+                  <Download size={14} className="text-green-600 dark:text-green-400" />
                 </button>
               </div>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              {/* Littoral guyanais - moved to right side */}
+              {/* Art Tembé - format large */}
               <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 shadow-2xl bg-white dark:bg-gray-900 group sm:col-span-2">
                 <div className="relative">
                   <img
                     src="/images/guyana-landscape.jpg"
-                    alt="Plage de Cayenne - Cocotiers et océan Atlantique"
+                    alt={t('culture.landscape')}
                     className="w-full h-48 object-cover"
                     loading="lazy"
                     onError={(event) => onImageFallback(event, fallbackImages.landscape)}
@@ -162,8 +163,8 @@ export default function CultureHighlight() {
                 </div>
                 <div className="p-5 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/20 flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Littoral guyanais</p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Plage de Cayenne - Cocotiers et océan Atlantique</p>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">{t('culture.landscape')}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{t('culture.landscapeDesc')}</p>
                   </div>
                   <button
                     onClick={() => downloadImage('/images/guyana-landscape.jpg', 'littoral-guyanais-cayenne.jpg')}
@@ -174,41 +175,40 @@ export default function CultureHighlight() {
                   </button>
                 </div>
               </div>
+              {/* Pagaie traditionnelle - maintenant en bas */}
               <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg group">
                 <div className="relative">
                   <img
-                    src="/images/guyana-road-sign.jpg"
-                    alt="Panneau routier en Guyane - Signalisation locale"
+                    src="/images/guyana-paddle.jpg"
+                    alt={t('culture.paddleDesc')}
                     className="w-full h-40 object-cover"
                     loading="lazy"
-                    onError={(event) => onImageFallback(event, fallbackImages.roadSign)}
+                    onError={(event) => onImageFallback(event, fallbackImages.paddle)}
                   />
                   <button
-                    onClick={() => downloadImage('/images/guyana-road-sign.jpg', 'panneau-routier-guyane.jpg')}
+                    onClick={() => downloadImage('/images/guyana-paddle.jpg', 'pagaie-traditionnelle-guyane.jpg')}
                     className="absolute top-3 right-3 p-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-lg shadow-md hover:bg-white dark:hover:bg-gray-800 transition-all opacity-0 group-hover:opacity-100"
                     title="Télécharger l'image"
                   >
-                    <Download size={16} className="text-green-600 dark:text-green-400" />
+                    <Download size={16} className="text-amber-600 dark:text-amber-400" />
                   </button>
                 </div>
-                <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 flex items-center justify-between">
+                <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">Signalisation locale</p>
-                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Sur les routes de Guyane française</p>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('culture.paddle')}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{t('culture.paddleDesc')}</p>
                   </div>
                   <button
-                    onClick={() => downloadImage('/images/guyana-road-sign.jpg', 'panneau-routier-guyane.jpg')}
-                    className="p-1.5 hover:bg-green-200 dark:hover:bg-green-800 rounded-lg transition-colors"
+                    onClick={() => downloadImage('/images/guyana-paddle.jpg', 'pagaie-traditionnelle-guyane.jpg')}
+                    className="p-1.5 hover:bg-amber-200 dark:hover:bg-amber-800 rounded-lg transition-colors"
                     title="Télécharger"
                   >
-                    <Download size={14} className="text-green-600 dark:text-green-400" />
+                    <Download size={14} className="text-amber-600 dark:text-amber-400" />
                   </button>
                 </div>
               </div>
             </div>
-            <div className="rounded-[2rem] border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 p-5 shadow-lg">
-              <p className="text-sm text-gray-700 dark:text-gray-300 text-center font-medium">🇬🇫 KOOGWE célèbre les traditions et le patrimoine culturel de la Guyane française</p>
-            </div>
+
           </div>
         </div>
       </div>
