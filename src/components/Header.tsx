@@ -125,17 +125,6 @@ export default function Header() {
             >
               {t('header.download')}
             </button>
-            <button
-              type="button"
-              onClick={() => navigateTo('/devenir-chauffeur')}
-              className={`text-sm font-medium transition-colors whitespace-nowrap px-4 py-2 rounded-lg ${
-                navSolid
-                  ? 'text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20'
-                  : 'text-white hover:bg-white/10'
-              }`}
-            >
-              {t('hero.becomeDriver')}
-            </button>
             <div className="ml-1 flex items-center gap-2">
               <ThemeToggle isScrolled={navSolid} />
               <LanguageSelector isScrolled={navSolid} />
@@ -215,13 +204,6 @@ export default function Header() {
               className="block w-full px-4 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-lg font-medium text-center hover:shadow-lg transition-all"
             >
               {t('header.download')}
-            </button>
-            <button
-              type="button"
-              onClick={() => navigateTo('/devenir-chauffeur')}
-              className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors font-medium"
-            >
-              {t('hero.becomeDriver')}
             </button>
             <div className="pt-3 border-t border-gray-200 dark:border-gray-700">
               <div className="px-2 flex items-center gap-2">
