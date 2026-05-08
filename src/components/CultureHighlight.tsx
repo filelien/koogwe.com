@@ -1,5 +1,4 @@
 import { useTranslation } from '../i18n/context';
-import { languages } from '../i18n/translations';
 import { Globe, Download } from 'lucide-react';
 
 const fallbackImages = {
@@ -31,7 +30,7 @@ const downloadImage = async (url: string, filename: string) => {
 };
 
 export default function CultureHighlight() {
-  const { t, language } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <section id="culture" className="py-24 bg-white dark:bg-gray-900 transition-colors">
