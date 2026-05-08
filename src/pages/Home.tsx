@@ -27,6 +27,9 @@ export default function Home() {
     >
       <Hero />
       <motion.div variants={sectionVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}>
+        <CultureHighlight />
+      </motion.div>
+      <motion.div variants={sectionVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}>
         <Features />
       </motion.div>
       <motion.div variants={sectionVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}>
@@ -37,9 +40,6 @@ export default function Home() {
       </motion.div>
       <motion.div variants={sectionVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}>
         <Security />
-      </motion.div>
-      <motion.div variants={sectionVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}>
-        <CultureHighlight />
       </motion.div>
       <motion.div variants={sectionVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}>
         <Coverage />

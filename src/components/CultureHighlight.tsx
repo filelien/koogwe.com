@@ -70,56 +70,59 @@ export default function CultureHighlight() {
             <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 shadow-2xl bg-white dark:bg-gray-900">
               <img
                 src="/images/guyana-tembe.jpg"
-                alt="Art tembé guyanais"
+                alt="Motifs colorés tembé - Art traditionnel guyanais"
                 className="w-full h-80 object-cover"
                 loading="lazy"
                 onError={(event) => onImageFallback(event, fallbackImages.tembe)}
               />
-              <div className="p-5">
-                <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{t('culture.tembe')}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{t('culture.tembeDesc')}</p>
+              <div className="p-5 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/20">
+                <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">{t('culture.tembe')}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Motifs géométriques colorés - Symboles du patrimoine créole guyanais</p>
               </div>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
                 <img
                   src="/images/guyana-paddle.jpg"
-                  alt="Pagaie guyanaise peinte"
+                  alt="Pagaie traditionnelle peinte - Artisanat guyanais"
                   className="w-full h-40 object-cover"
                   loading="lazy"
                   onError={(event) => onImageFallback(event, fallbackImages.paddle)}
                 />
-                <div className="p-4">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('culture.paddle')}</p>
+                <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20">
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white">Pagaie décorative</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Artisanat fluvial traditionnel</p>
                 </div>
               </div>
               <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
                 <img
                   src="/images/guyana-landscape.jpg"
-                  alt="Paysage guyanais avec palmiers"
+                  alt="Plage de Cayenne - Cocotiers et océan Atlantique"
                   className="w-full h-40 object-cover"
                   loading="lazy"
                   onError={(event) => onImageFallback(event, fallbackImages.landscape)}
                 />
-                <div className="p-4">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('culture.landscape')}</p>
+                <div className="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20">
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white">Littoral guyanais</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Palmiers et océan Atlantique</p>
                 </div>
               </div>
               <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
                 <img
                   src="/images/guyana-road-sign.jpg"
-                  alt="Panneau de route guyanais"
+                  alt="Panneau routier en Guyane - Signalisation locale"
                   className="w-full h-40 object-cover"
                   loading="lazy"
                   onError={(event) => onImageFallback(event, fallbackImages.roadSign)}
                 />
-                <div className="p-4">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('culture.roadSign')}</p>
+                <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20">
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white">Signalisation locale</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Sur les routes de Guyane française</p>
                 </div>
               </div>
             </div>
-            <div className="rounded-[2rem] border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 p-5 shadow-lg">
-              <p className="text-sm text-gray-700 dark:text-gray-300">{t('culture.photoText')}</p>
+            <div className="rounded-[2rem] border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 p-5 shadow-lg">
+              <p className="text-sm text-gray-700 dark:text-gray-300 text-center font-medium">🇬🇫 KOOGWE célèbre les traditions et le patrimoine culturel de la Guyane française</p>
             </div>
           </div>
         </div>
