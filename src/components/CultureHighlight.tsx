@@ -60,26 +60,36 @@ export default function CultureHighlight() {
 
             {/* Languages Section */}
             <div className="rounded-3xl bg-gradient-to-br from-gray-900 to-gray-800 p-6 shadow-xl">
-              <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center gap-2 mb-5">
                 <Globe className="text-emerald-400" size={20} />
                 <h3 className="font-semibold text-white">{t('coverage.multilingual')}</h3>
               </div>
-              <div className="grid grid-cols-5 gap-2">
+              <div className="space-y-2">
                 {languages.map((lang) => (
                   <div
                     key={lang.code}
-                    className={`text-center p-2 rounded-xl transition-all ${
+                    className={`flex items-center gap-3 p-3 rounded-xl transition-all ${
                       language === lang.code
                         ? 'bg-emerald-500/30 ring-2 ring-emerald-400'
                         : 'bg-white/10 hover:bg-white/20'
                     }`}
                   >
-                    <div className="text-2xl mb-1">{lang.flag}</div>
-                    <p className="text-xs text-gray-300">{lang.code.toUpperCase()}</p>
+                    <span className="text-2xl">{lang.flag}</span>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-white">{lang.name}</p>
+                      <p className="text-xs text-gray-400">
+                        {lang.code === 'fr' && 'France / Guyane'}
+                        {lang.code === 'en' && 'Royaume-Uni'}
+                        {lang.code === 'pt' && 'Brésil'}
+                        {lang.code === 'es' && 'Espagne'}
+                        {lang.code === 'cr' && 'Guyane Française'}
+                      </p>
+                    </div>
+                    <span className="text-xs font-bold text-gray-500">{lang.code.toUpperCase()}</span>
                   </div>
                 ))}
               </div>
-              <p className="text-xs text-gray-400 mt-3 text-center">{t('coverage.multilingualDesc')}</p>
+              <p className="text-xs text-gray-400 mt-4 text-center">{t('coverage.multilingualDesc')}</p>
             </div>
           </div>
 
