@@ -1,6 +1,6 @@
 import { useTranslation } from '../i18n/context';
 import { languages } from '../i18n/translations';
-import { Globe } from 'lucide-react';
+import { Globe, Download } from 'lucide-react';
 
 const fallbackImages = {
   tembe: 'https://images.unsplash.com/photo-1522542550061-71fd4b42f3a3?auto=format&fit=crop&w=1200&q=80',
@@ -12,6 +12,23 @@ const fallbackImages = {
 function onImageFallback(event: { currentTarget: HTMLImageElement }, fallback: string) {
   event.currentTarget.src = fallback;
 }
+
+const downloadImage = async (url: string, filename: string) => {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+  } catch (error) {
+    console.error('Erreur lors du téléchargement:', error);
+    window.open(url, '_blank');
+  }
+};
 
 export default function CultureHighlight() {
   const { t, language } = useTranslation();
@@ -68,57 +85,129 @@ export default function CultureHighlight() {
 
           <div className="grid gap-4">
             {/* Main large image - Littoral guyanais */}
-            <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 shadow-2xl bg-white dark:bg-gray-900">
-              <img
-                src="/images/guyana-landscape.jpg"
-                alt="Plage de Cayenne - Cocotiers et océan Atlantique"
-                className="w-full h-80 object-cover"
-                loading="lazy"
-                onError={(event) => onImageFallback(event, fallbackImages.landscape)}
-              />
-              <div className="p-5 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/20">
-                <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Littoral guyanais</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Plage de Cayenne - Cocotiers et océan Atlantique</p>
+            <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 shadow-2xl bg-white dark:bg-gray-900 group">
+              <div className="relative">
+                <img
+                  src="/images/guyana-landscape.jpg"
+                  alt="Plage de Cayenne - Cocotiers et océan Atlantique"
+                  className="w-full h-80 object-cover"
+                  loading="lazy"
+                  onError={(event) => onImageFallback(event, fallbackImages.landscape)}
+                />
+                <button
+                  onClick={() => downloadImage('/images/guyana-landscape.jpg', 'littoral-guyanais-cayenne.jpg')}
+                  className="absolute top-4 right-4 p-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-xl shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-all opacity-0 group-hover:opacity-100"
+                  title="Télécharger l'image"
+                >
+                  <Download size={20} className="text-emerald-600 dark:text-emerald-400" />
+                </button>
+              </div>
+              <div className="p-5 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/20 flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Littoral guyanais</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Plage de Cayenne - Cocotiers et océan Atlantique</p>
+                </div>
+                <button
+                  onClick={() => downloadImage('/images/guyana-landscape.jpg', 'littoral-guyanais-cayenne.jpg')}
+                  className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg hover:bg-emerald-200 dark:hover:bg-emerald-800 transition-colors"
+                  title="Télécharger"
+                >
+                  <Download size={18} className="text-emerald-600 dark:text-emerald-400" />
+                </button>
               </div>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
-                <img
-                  src="/images/guyana-tembe.jpg"
-                  alt="Motifs colorés tembé - Art traditionnel guyanais"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                  onError={(event) => onImageFallback(event, fallbackImages.tembe)}
-                />
-                <div className="p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('culture.tembe')}</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Motifs créole guyanais</p>
+              <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg group">
+                <div className="relative">
+                  <img
+                    src="/images/guyana-tembe.jpg"
+                    alt="Motifs colorés tembé - Art traditionnel guyanais"
+                    className="w-full h-40 object-cover"
+                    loading="lazy"
+                    onError={(event) => onImageFallback(event, fallbackImages.tembe)}
+                  />
+                  <button
+                    onClick={() => downloadImage('/images/guyana-tembe.jpg', 'art-tembe-guyanais.jpg')}
+                    className="absolute top-3 right-3 p-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-lg shadow-md hover:bg-white dark:hover:bg-gray-800 transition-all opacity-0 group-hover:opacity-100"
+                    title="Télécharger l'image"
+                  >
+                    <Download size={16} className="text-emerald-600 dark:text-emerald-400" />
+                  </button>
+                </div>
+                <div className="p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{t('culture.tembe')}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Motifs créole guyanais</p>
+                  </div>
+                  <button
+                    onClick={() => downloadImage('/images/guyana-tembe.jpg', 'art-tembe-guyanais.jpg')}
+                    className="p-1.5 hover:bg-emerald-200 dark:hover:bg-emerald-800 rounded-lg transition-colors"
+                    title="Télécharger"
+                  >
+                    <Download size={14} className="text-emerald-600 dark:text-emerald-400" />
+                  </button>
                 </div>
               </div>
-              <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
-                <img
-                  src="/images/guyana-paddle.jpg"
-                  alt="Pagaie traditionnelle peinte - Artisanat guyanais"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                  onError={(event) => onImageFallback(event, fallbackImages.paddle)}
-                />
-                <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">Pagaie décorative</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Artisanat fluvial traditionnel</p>
+              <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg group">
+                <div className="relative">
+                  <img
+                    src="/images/guyana-paddle.jpg"
+                    alt="Pagaie traditionnelle peinte - Artisanat guyanais"
+                    className="w-full h-40 object-cover"
+                    loading="lazy"
+                    onError={(event) => onImageFallback(event, fallbackImages.paddle)}
+                  />
+                  <button
+                    onClick={() => downloadImage('/images/guyana-paddle.jpg', 'pagaie-traditionnelle-guyane.jpg')}
+                    className="absolute top-3 right-3 p-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-lg shadow-md hover:bg-white dark:hover:bg-gray-800 transition-all opacity-0 group-hover:opacity-100"
+                    title="Télécharger l'image"
+                  >
+                    <Download size={16} className="text-amber-600 dark:text-amber-400" />
+                  </button>
+                </div>
+                <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white">Pagaie décorative</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Artisanat fluvial traditionnel</p>
+                  </div>
+                  <button
+                    onClick={() => downloadImage('/images/guyana-paddle.jpg', 'pagaie-traditionnelle-guyane.jpg')}
+                    className="p-1.5 hover:bg-amber-200 dark:hover:bg-amber-800 rounded-lg transition-colors"
+                    title="Télécharger"
+                  >
+                    <Download size={14} className="text-amber-600 dark:text-amber-400" />
+                  </button>
                 </div>
               </div>
-              <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg">
-                <img
-                  src="/images/guyana-road-sign.jpg"
-                  alt="Panneau routier en Guyane - Signalisation locale"
-                  className="w-full h-40 object-cover"
-                  loading="lazy"
-                  onError={(event) => onImageFallback(event, fallbackImages.roadSign)}
-                />
-                <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20">
-                  <p className="text-sm font-semibold text-gray-900 dark:text-white">Signalisation locale</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Sur les routes de Guyane française</p>
+              <div className="rounded-[2rem] overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg group">
+                <div className="relative">
+                  <img
+                    src="/images/guyana-road-sign.jpg"
+                    alt="Panneau routier en Guyane - Signalisation locale"
+                    className="w-full h-40 object-cover"
+                    loading="lazy"
+                    onError={(event) => onImageFallback(event, fallbackImages.roadSign)}
+                  />
+                  <button
+                    onClick={() => downloadImage('/images/guyana-road-sign.jpg', 'panneau-routier-guyane.jpg')}
+                    className="absolute top-3 right-3 p-2 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-lg shadow-md hover:bg-white dark:hover:bg-gray-800 transition-all opacity-0 group-hover:opacity-100"
+                    title="Télécharger l'image"
+                  >
+                    <Download size={16} className="text-green-600 dark:text-green-400" />
+                  </button>
+                </div>
+                <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white">Signalisation locale</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">Sur les routes de Guyane française</p>
+                  </div>
+                  <button
+                    onClick={() => downloadImage('/images/guyana-road-sign.jpg', 'panneau-routier-guyane.jpg')}
+                    className="p-1.5 hover:bg-green-200 dark:hover:bg-green-800 rounded-lg transition-colors"
+                    title="Télécharger"
+                  >
+                    <Download size={14} className="text-green-600 dark:text-green-400" />
+                  </button>
                 </div>
               </div>
             </div>
