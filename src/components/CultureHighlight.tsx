@@ -1,4 +1,6 @@
 import { useTranslation } from '../i18n/context';
+import { languages } from '../i18n/translations';
+import { Globe } from 'lucide-react';
 
 const fallbackImages = {
   tembe: 'https://images.unsplash.com/photo-1522542550061-71fd4b42f3a3?auto=format&fit=crop&w=1200&q=80',
@@ -12,10 +14,10 @@ function onImageFallback(event: { currentTarget: HTMLImageElement }, fallback: s
 }
 
 export default function CultureHighlight() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   return (
-    <section className="py-24 bg-white dark:bg-gray-900 transition-colors">
+    <section id="culture" className="py-24 bg-white dark:bg-gray-900 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 items-start">
           <div className="space-y-6">
@@ -29,14 +31,38 @@ export default function CultureHighlight() {
               {t('culture.description')}
             </p>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-3xl bg-emerald-50 dark:bg-emerald-900/20 p-6 shadow-lg border border-emerald-100 dark:border-emerald-800">
+              <div className="rounded-3xl bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/20 p-6 shadow-lg border border-emerald-100 dark:border-emerald-800">
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{t('culture.tembe')}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('culture.tembeDesc')}</p>
               </div>
-              <div className="rounded-3xl bg-cyan-50 dark:bg-cyan-900/20 p-6 shadow-lg border border-cyan-100 dark:border-cyan-800">
+              <div className="rounded-3xl bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 p-6 shadow-lg border border-amber-100 dark:border-amber-800">
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{t('culture.paddle')}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('culture.paddleDesc')}</p>
               </div>
+            </div>
+
+            {/* Languages Section */}
+            <div className="rounded-3xl bg-gradient-to-br from-gray-900 to-gray-800 p-6 shadow-xl">
+              <div className="flex items-center gap-2 mb-4">
+                <Globe className="text-emerald-400" size={20} />
+                <h3 className="font-semibold text-white">{t('coverage.multilingual')}</h3>
+              </div>
+              <div className="grid grid-cols-5 gap-2">
+                {languages.map((lang) => (
+                  <div
+                    key={lang.code}
+                    className={`text-center p-2 rounded-xl transition-all ${
+                      language === lang.code
+                        ? 'bg-emerald-500/30 ring-2 ring-emerald-400'
+                        : 'bg-white/10 hover:bg-white/20'
+                    }`}
+                  >
+                    <div className="text-2xl mb-1">{lang.flag}</div>
+                    <p className="text-xs text-gray-300">{lang.code.toUpperCase()}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-gray-400 mt-3 text-center">{t('coverage.multilingualDesc')}</p>
             </div>
           </div>
 

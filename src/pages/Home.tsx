@@ -4,6 +4,7 @@ import Features from '../components/Features';
 import Drivers from '../components/Drivers';
 import Partners from '../components/Partners';
 import Security from '../components/Security';
+import CultureHighlight from '../components/CultureHighlight';
 import Coverage from '../components/Coverage';
 import Download from '../components/Download';
 
@@ -36,6 +37,9 @@ export default function Home() {
       </motion.div>
       <motion.div variants={sectionVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}>
         <Security />
+      </motion.div>
+      <motion.div variants={sectionVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}>
+        <CultureHighlight />
       </motion.div>
       <motion.div variants={sectionVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }}>
         <Coverage />
