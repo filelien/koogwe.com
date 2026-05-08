@@ -13,9 +13,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           <div className="lg:col-span-2">
-            <Link to="/" className="inline-flex items-center gap-3 mb-4 group">
-              <img src={koogweLogo} alt="" className="w-12 h-12 rounded-full object-cover transition-transform group-hover:scale-105" />
-              <h3 className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+            <Link to="/" className="inline-flex items-center gap-4 mb-6 group">
+              <img src={koogweLogo} alt="" className="w-20 h-20 rounded-full object-cover transition-transform group-hover:scale-105 shadow-lg ring-4 ring-emerald-500/30" />
+              <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                 KOOGWE
               </h3>
             </Link>

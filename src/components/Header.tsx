@@ -37,11 +37,6 @@ export default function Header() {
     }
   };
 
-  const navigateTo = (path: string) => {
-    navigate(path);
-    setIsMobileMenuOpen(false);
-  };
-
   const linkScrollClass = navSolid
     ? 'text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400'
     : 'text-white hover:text-emerald-300 drop-shadow-md';
