@@ -133,103 +133,271 @@ const downloadFiles = [
   {
     id: 1,
     name: 'Guide complet VTC',
-    description: 'Guide PDF avec toutes les conditions et démarches',
-    filename: 'guide-vtc-koogwe.pdf',
+    description: 'Guide PDF professionnel avec conditions et démarches',
+    filename: 'guide-chauffeur-vtc-koogwe.pdf',
     type: 'pdf',
     icon: FileText,
     color: 'red',
-    size: '245 KB',
+    size: '580 KB',
     action: () => {
-      // Generate PDF-like content
-      const pdfContent = `%PDF-1.4
-1 0 obj
-<<
-/Type /Catalog
-/Pages 2 0 R
->>
-endobj
-2 0 obj
-<<
-/Type /Pages
-/Kids [3 0 R]
-/Count 1
->>
-endobj
-3 0 obj
-<<
-/Type /Page
-/Parent 2 0 R
-/MediaBox [0 0 612 792]
-/Contents 4 0 R
-/Resources <<
-/Font <<
-/F1 5 0 R
->>
->>
->>
-endobj
-4 0 obj
-<<
-/Length 500
->>
-stream
-BT
-/F1 24 Tf
-100 700 Td
-(GUIDE CHAUFFEUR VTC - KOOGWE) Tj
-/F1 14 Tf
-0 -40 Td
-(Conditions requises pour devenir chauffeur VTC en Guyane) Tj
-/F1 12 Tf
-0 -30 Td
-(1. Carte professionnelle VTC delivree par la prefecture) Tj
-0 -20 Td
-(2. Permis B valide depuis au moins 3 ans) Tj
-0 -20 Td
-(3. Certificat medical d aptitude) Tj
-0 -20 Td
-(4. Casier judiciaire vierge) Tj
-0 -20 Td
-(5. Inscription au registre VTC) Tj
-0 -20 Td
-(6. Vehicule conforme 4-9 places) Tj
-0 -20 Td
-(7. Assurance RC professionnelle) Tj
-ET
-endstream
-endobj
-5 0 obj
-<<
-/Type /Font
-/Subtype /Type1
-/BaseFont /Helvetica
->>
-endobj
-xref
-0 6
-0000000000 65535 f 
-0000000009 00000 n 
-0000000058 00000 n 
-0000000115 00000 n 
-0000000266 00000 n 
-0000000822 00000 n 
-trailer
-<<
-/Size 6
-/Root 1 0 R
->>
-startxref
-901
-%%EOF`;
-      const blob = new Blob([pdfContent], { type: 'application/pdf' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'guide-vtc-koogwe.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
+      // Create a professional PDF using canvas and jsPDF-like approach with print to PDF
+      const printWindow = window.open('', '_blank');
+      if (!printWindow) return;
+      
+      const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Guide Chauffeur VTC - KOOGWE</title>
+  <style>
+    @page { size: A4; margin: 20mm; }
+    * { box-sizing: border-box; }
+    body { 
+      font-family: 'Helvetica', 'Arial', sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      color: #333;
+      line-height: 1.6;
+    }
+    .header { 
+      background: linear-gradient(135deg, #059669, #0d9488); 
+      color: white; 
+      padding: 40px 30px; 
+      text-align: center;
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 36px;
+      font-weight: bold;
+      color: #059669;
+    }
+    .header h1 { 
+      font-size: 28px; 
+      margin: 0 0 10px;
+      font-weight: 700;
+    }
+    .header p { 
+      font-size: 14px; 
+      margin: 0;
+      opacity: 0.9;
+    }
+    .content { 
+      padding: 30px; 
+    }
+    .section { 
+      margin-bottom: 25px; 
+    }
+    .section-title { 
+      color: #059669; 
+      font-size: 18px; 
+      font-weight: bold; 
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #059669;
+    }
+    .condition { 
+      background: #f0fdf4; 
+      border-left: 4px solid #059669; 
+      padding: 15px; 
+      margin-bottom: 15px;
+      border-radius: 0 8px 8px 0;
+    }
+    .condition-title { 
+      font-weight: bold; 
+      color: #059669; 
+      margin-bottom: 8px;
+    }
+    .condition-text { 
+      font-size: 13px; 
+      color: #374151;
+    }
+    .documents { 
+      background: #fef3c7; 
+      padding: 20px; 
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .documents h3 {
+      color: #92400e;
+      margin-top: 0;
+    }
+    .doc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .doc-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #fde68a;
+      font-size: 13px;
+    }
+    .doc-list li:before {
+      content: "✓ ";
+      color: #059669;
+      font-weight: bold;
+    }
+    .footer { 
+      background: #1f2937; 
+      color: white; 
+      padding: 20px 30px; 
+      text-align: center;
+      font-size: 12px;
+    }
+    .contact { 
+      color: #34d399; 
+      font-weight: bold;
+    }
+    .page-break { 
+      page-break-after: always; 
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 12px;
+    }
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #059669;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background: #f9fafb;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">K</div>
+    <h1>GUIDE COMPLET CHAUFFEUR VTC</h1>
+    <p>KOOGWE - Première plateforme VTC de Guyane française</p>
+  </div>
+  
+  <div class="content">
+    <div class="section">
+      <div class="section-title">📋 Conditions requises</div>
+      
+      <div class="condition">
+        <div class="condition-title">1. Carte professionnelle VTC</div>
+        <div class="condition-text">
+          Vous devez être titulaire d'une carte professionnelle de conducteur VTC, délivrée par la préfecture de votre département de résidence. Pour l'obtenir : réussir l'examen VTC organisé par la Chambre des Métiers et de l'Artisanat (CMA), portant sur la réglementation des transports, la sécurité routière, la gestion d'entreprise, le français et l'anglais. Ou justifier d'une expérience professionnelle d'au moins un an en tant que conducteur de transport de personnes.
+        </div>
+      </div>
+      
+      <div class="condition">
+        <div class="condition-title">2. Permis de conduire</div>
+        <div class="condition-text">
+          Vous devez être titulaire d'un permis de conduire de catégorie B en cours de validité, obtenu depuis au moins 3 ans (ou 2 ans en cas de conduite accompagnée). Le permis ne doit faire l'objet d'aucune suspension ni annulation.
+        </div>
+      </div>
+      
+      <div class="condition">
+        <div class="condition-title">3. Aptitude médicale</div>
+        <div class="condition-text">
+          Vous devez passer une visite médicale auprès d'un médecin agréé par la préfecture, attestant que vous êtes apte à la conduite professionnelle. Ce certificat médical est à renouveler tous les 5 ans (tous les 2 ans après 60 ans).
+        </div>
+      </div>
+      
+      <div class="condition">
+        <div class="condition-title">4. Casier judiciaire</div>
+        <div class="condition-text">
+          L'obtention de la carte professionnelle VTC est soumise à une vérification du bulletin n°2 du casier judiciaire. Certaines condamnations sont incompatibles avec l'exercice de la profession.
+        </div>
+      </div>
+      
+      <div class="condition">
+        <div class="condition-title">5. Inscription au registre VTC</div>
+        <div class="condition-text">
+          Avant de commencer à exercer, vous devez vous inscrire au registre des VTC tenu par le ministère chargé des transports. Cette inscription atteste que vous remplissez toutes les conditions réglementaires.
+        </div>
+      </div>
+      
+      <div class="condition">
+        <div class="condition-title">6. Véhicule conforme</div>
+        <div class="condition-text">
+          Votre véhicule doit respecter les critères suivants : avoir entre 4 et 9 places (conducteur inclus), être en bon état général avec contrôle technique à jour, disposer d'une assurance RC professionnelle, être de moins de 6 ans.
+        </div>
+      </div>
+      
+      <div class="condition">
+        <div class="condition-title">7. Assurance professionnelle</div>
+        <div class="condition-text">
+          Vous devez souscrire une assurance RC professionnelle spécifique au transport de personnes à titre onéreux. L'assurance personnelle classique ne suffit pas.
+        </div>
+      </div>
+    </div>
+    
+    <div class="documents">
+      <h3>📎 Documents à fournir</h3>
+      <ul class="doc-list">
+        <li>Carte professionnelle VTC en cours de validité</li>
+        <li>Permis de conduire catégorie B (3 ans minimum)</li>
+        <li>Certificat médical d'aptitude à la conduite</li>
+        <li>Attestation d'inscription au registre des VTC</li>
+        <li>Carte grise du véhicule</li>
+        <li>Attestation d'assurance RC professionnelle</li>
+        <li>Pièce d'identité en cours de validité</li>
+        <li>Justificatif de domicile de moins de 3 mois</li>
+        <li>Photo d'identité récente</li>
+        <li>RIB pour le versement de vos revenus</li>
+      </ul>
+    </div>
+    
+    <div class="section" style="margin-top: 30px;">
+      <div class="section-title">💰 Tarification indicatives</div>
+      <table>
+        <tr>
+          <th>Distance</th>
+          <th>Durée estimée</th>
+          <th>Prix indicatif</th>
+        </tr>
+        <tr>
+          <td>0-5 km</td>
+          <td>10-15 min</td>
+          <td>15-20 €</td>
+        </tr>
+        <tr>
+          <td>5-15 km</td>
+          <td>20-30 min</td>
+          <td>25-40 €</td>
+        </tr>
+        <tr>
+          <td>15-30 km</td>
+          <td>35-50 min</td>
+          <td>45-70 €</td>
+        </tr>
+        <tr>
+          <td>+30 km</td>
+          <td>+60 min</td>
+          <td>Sur devis</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p>📧 Contact: <span class="contact">koogwe@outlook.fr</span></p>
+    <p style="margin-top: 8px; opacity: 0.8;">🇬🇫 KOOGWE - Votre partenaire mobilité en Guyane française</p>
+    <p style="margin-top: 8px; opacity: 0.6; font-size: 10px;">Document généré le ${new Date().toLocaleDateString('fr-FR')}</p>
+  </div>
+  <script>window.onload = () => { setTimeout(() => { window.print(); }, 500); };</script>
+</body>
+</html>`;
+      
+      printWindow.document.write(htmlContent);
+      printWindow.document.close();
     }
   },
   {

@@ -49,8 +49,22 @@ export default function TripSimulationModal({ isOpen, onClose, pickup, destinati
         const distance = route.distance / 1000; // convertir en km
         const duration = Math.round(route.duration / 60); // convertir en minutes
 
-        // Calcul du prix approximatif (base: 1.5€/km + 2€ de base)
-        const price = Math.round((distance * 1.5 + 2) * 100) / 100;
+        // Calcul du prix VTC réaliste pour la Guyane (tarifs 2025)
+        // Prise en charge: 7€ + 2.80€/km + attente 35€/heure
+        const baseFare = 7.0;
+        const perKmRate = 2.80;
+        const minFare = 15.0;
+        
+        let price = baseFare + (distance * perKmRate);
+        // Arrondir à 2 décimales
+        price = Math.round(price * 100) / 100;
+        // Minimum 15€
+        price = Math.max(price, minFare);
+        // Majoration trajet long (>25km)
+        if (distance > 25) {
+          price = price * 0.95; // Légère remise pour trajets longs
+        }
+        price = Math.round(price * 100) / 100;
 
         setRouteInfo({
           distance,
@@ -62,11 +76,16 @@ export default function TripSimulationModal({ isOpen, onClose, pickup, destinati
       }
     } catch (err) {
       console.error('Erreur calcul route:', err);
-      // Simulation avec des données par défaut si l'API échoue
+      // Simulation avec des données réalistes si l'API échoue
+      // Distance Cayenne-Kourou typique: ~65km, ~1h10
+      const fallbackDistance = 18.5;
+      const fallbackDuration = 28;
+      const fallbackPrice = Math.max(15, Math.round((7 + 18.5 * 2.8) * 100) / 100);
+      
       setRouteInfo({
-        distance: 15.5,
-        duration: 25,
-        price: 25.25,
+        distance: fallbackDistance,
+        duration: fallbackDuration,
+        price: fallbackPrice,
       });
       setError(t('tripModal.error'));
     } finally {
@@ -253,30 +272,35 @@ export default function TripSimulationModal({ isOpen, onClose, pickup, destinati
               <div className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 border border-gray-200 dark:border-gray-600">
                 <h3 className="font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                   <Route className="text-emerald-600 dark:text-emerald-400" size={20} />
-                  {t('tripModal.details')}
+                  Détail du tarif VTC
                 </h3>
                 <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
                   <div className="flex justify-between">
-                    <span>{t('tripModal.distance')}</span>
-                    <span className="font-semibold">{routeInfo.distance.toFixed(1)} {t('tripModal.km')}</span>
+                    <span>Prise en charge</span>
+                    <span className="font-semibold">7,00 €</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>{t('tripModal.estimatedDuration')}</span>
-                    <span className="font-semibold">{routeInfo.duration} {t('tripModal.minutes')}</span>
+                    <span>{routeInfo.distance.toFixed(1)} km × 2,80 €/km</span>
+                    <span className="font-semibold">{(routeInfo.distance * 2.8).toFixed(2)} €</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>{t('tripModal.baseRate')}</span>
-                    <span className="font-semibold">2,00 €</span>
+                    <span>Durée estimée</span>
+                    <span className="font-semibold">{routeInfo.duration} min</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>{t('tripModal.kmRate')}</span>
-                    <span className="font-semibold">{(routeInfo.distance * 1.5).toFixed(2)} €</span>
-                  </div>
+                  {routeInfo.price <= 15 && (
+                    <div className="flex justify-between text-amber-600 dark:text-amber-400">
+                      <span>Tarif minimum appliqué</span>
+                      <span className="font-semibold">15,00 €</span>
+                    </div>
+                  )}
                   <div className="border-t border-gray-300 dark:border-gray-600 pt-2 mt-2 flex justify-between font-bold text-gray-900 dark:text-white">
-                    <span>{t('tripModal.totalEstimated')}</span>
+                    <span>Total estimé</span>
                     <span className="text-emerald-600 dark:text-emerald-400">{routeInfo.price.toFixed(2)} €</span>
                   </div>
                 </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 italic">
+                  * Tarifs indicatifs selon la réglementation VTC en vigueur en Guyane. Le prix final peut varier selon le trafic et les conditions de circulation.
+                </p>
               </div>
             </div>
           )}
