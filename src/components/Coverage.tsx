@@ -143,7 +143,20 @@ export default function Coverage() {
                 key={lang.code}
                 className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all duration-300 border border-white/10"
               >
-                <div className="text-5xl mb-4">{lang.flag}</div>
+                <div className="mb-4 flex items-center justify-center">
+                  {lang.flagSrc ? (
+                    <img
+                      src={lang.flagSrc}
+                      alt={`${lang.name} flag`}
+                      className="w-16 h-16 rounded-full object-cover"
+                      onError={(event) => {
+                        event.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  ) : (
+                    <span className="text-5xl">{lang.flag}</span>
+                  )}
+                </div>
                 <p className="font-bold text-lg mb-1">{lang.name}</p>
                 <p className="text-sm text-gray-400">{lang.code.toUpperCase()}</p>
               </div>

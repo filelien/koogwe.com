@@ -1,6 +1,6 @@
-import { MapContainer, TileLayer, Marker, Popup, Tooltip, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Tooltip } from 'react-leaflet';
 import { divIcon } from 'leaflet';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 
 interface MapViewProps {
@@ -8,16 +8,12 @@ interface MapViewProps {
 }
 
 const cityCoordinates: Record<string, { center: [number, number]; name: string; region: string }> = {
-  Cayenne: { center: [4.9333, -52.3333], name: 'Cayenne', region: 'Chef-lieu' },
-  Kourou: { center: [5.1556, -52.6475], name: 'Kourou', region: 'Littoral nord' },
-  'Saint-Laurent-du-Maroni': { center: [5.5058, -54.0286], name: 'Saint-Laurent-du-Maroni', region: 'Littoral ouest' },
-  Matoury: { center: [4.8486, -52.3250], name: 'Matoury', region: 'Aire métropolitaine' },
-  'Remire-Montjoly': { center: [4.9167, -52.2667], name: 'Remire-Montjoly', region: 'Région côtière' },
+  Cayenne: { center: [4.9375, -52.3333], name: 'Cayenne', region: 'Chef-lieu' },
+  Kourou: { center: [5.16, -52.65], name: 'Kourou', region: 'Littoral nord' },
+  'Saint-Laurent-du-Maroni': { center: [5.5, -54.0333], name: 'Saint-Laurent-du-Maroni', region: 'Littoral ouest' },
+  Matoury: { center: [4.85, -52.3333], name: 'Matoury', region: 'Aire métropolitaine' },
+  'Remire-Montjoly': { center: [4.9, -52.2667], name: 'Remire-Montjoly', region: 'Région côtière' },
 };
-
-const GUYANA_CENTER: [number, number] = [5.0, -53.0];
-const OVERVIEW_ZOOM = 8;
-const CITY_ZOOM = 13;
 
 // Custom marker icon for cities
 const createMarkerIcon = (isActive: boolean = false) => divIcon({
@@ -27,30 +23,18 @@ const createMarkerIcon = (isActive: boolean = false) => divIcon({
   iconAnchor: [isActive ? 18 : 14, isActive ? 18 : 14],
 });
 
-function MapController({ activeCity }: { activeCity: string }) {
-  const map = useMap();
-  const isFirstRender = useRef(true);
-
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    const cityData = cityCoordinates[activeCity];
-    if (cityData) {
-      map.setView(cityData.center, CITY_ZOOM, { animate: true });
-    }
-  }, [activeCity, map]);
-
-  return null;
-}
-
 export default function MapView({ selectedCity = 'Cayenne' }: MapViewProps) {
+  const mapRef = useRef<any>(null);
   const [activeCity, setActiveCity] = useState(selectedCity);
 
   useEffect(() => {
-    setActiveCity(selectedCity);
-  }, [selectedCity]);
+    if (mapRef.current && activeCity) {
+      const cityData = cityCoordinates[activeCity];
+      if (cityData) {
+        mapRef.current.setView(cityData.center, 13, { animate: true });
+      }
+    }
+  }, [activeCity]);
 
   const handleCityClick = (cityName: string) => {
     setActiveCity(cityName);
@@ -60,12 +44,12 @@ export default function MapView({ selectedCity = 'Cayenne' }: MapViewProps) {
     <div className="w-full rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-xl">
       <div className="w-full h-[500px] rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-700 bg-blue-50">
         <MapContainer
-          center={GUYANA_CENTER}
-          zoom={OVERVIEW_ZOOM}
+          ref={mapRef}
+          center={cityCoordinates[activeCity].center}
+          zoom={13}
           scrollWheelZoom={false}
           className="w-full h-full"
         >
-          <MapController activeCity={activeCity} />
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -82,7 +66,7 @@ export default function MapView({ selectedCity = 'Cayenne' }: MapViewProps) {
               <Tooltip 
                 direction="right" 
                 offset={[16, 0]} 
-                permanent
+                permanent={activeCity === city.name}
                 className="leaflet-tooltip-custom"
                 sticky={false}
               >

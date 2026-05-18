@@ -92,9 +92,20 @@ export default function LanguageModal() {
                           repeat: Infinity,
                           delay: index * 0.15,
                         }}
-                        className="text-6xl mb-4"
+                        className="mb-4 flex items-center justify-center"
                       >
-                        {lang.flag}
+                        {lang.flagSrc ? (
+                          <img
+                            src={lang.flagSrc}
+                            alt={`${lang.name} flag`}
+                            className="w-16 h-16 rounded-full object-cover shadow-lg"
+                            onError={(event) => {
+                              event.currentTarget.style.display = 'none';
+                            }}
+                          />
+                        ) : (
+                          <span className="text-6xl">{lang.flag}</span>
+                        )}
                       </motion.div>
 
                       <div className="mb-2">

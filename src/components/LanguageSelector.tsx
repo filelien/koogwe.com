@@ -45,7 +45,18 @@ export default function LanguageSelector({ isScrolled = false }: LanguageSelecto
       >
         <Globe size={18} />
         <span className="text-lg hidden sm:inline leading-none">
-          {currentLanguage?.flag || '🌐'}
+          {currentLanguage?.flagSrc ? (
+            <img
+              src={currentLanguage.flagSrc}
+              alt={`${currentLanguage.name} flag`}
+              className="inline-block w-5 h-5 rounded-full object-cover"
+              onError={(event) => {
+                event.currentTarget.style.display = 'none';
+              }}
+            />
+          ) : (
+            currentLanguage?.flag || '🌐'
+          )}
         </span>
         <ChevronDown size={16} className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
@@ -73,8 +84,19 @@ export default function LanguageSelector({ isScrolled = false }: LanguageSelecto
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                 } ${isHovered === lang.code && language !== lang.code ? 'translate-x-1' : ''}`}
               >
-                <span className={`text-2xl transition-transform duration-300 ${isHovered === lang.code && language !== lang.code ? 'scale-125' : 'scale-100'}`}>
-                  {lang.flag}
+                <span className={`inline-flex items-center justify-center w-10 h-10 rounded-full overflow-hidden bg-white/80 shadow-sm transition-transform duration-300 ${isHovered === lang.code && language !== lang.code ? 'scale-110' : 'scale-100'}`}>
+                  {lang.flagSrc ? (
+                    <img
+                      src={lang.flagSrc}
+                      alt={`${lang.name} flag`}
+                      className="w-full h-full object-cover"
+                      onError={(event) => {
+                        event.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  ) : (
+                    <span className="text-2xl">{lang.flag}</span>
+                  )}
                 </span>
                 <div className="flex-1">
                   <div className="font-semibold">{lang.name}</div>

@@ -13,9 +13,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           <div className="lg:col-span-2">
-            <Link to="/" className="inline-flex items-center gap-4 mb-6 group">
-              <img src={koogweLogo} alt="" className="w-20 h-20 rounded-full object-cover transition-transform group-hover:scale-105 shadow-lg ring-4 ring-emerald-500/30" />
-              <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+            <Link to="/" className="inline-flex items-center gap-4 mb-4 group">
+              <img src={koogweLogo} alt="" className="w-20 h-20 rounded-2xl object-cover transition-transform group-hover:scale-105" />
+              <h3 className="text-4xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                 KOOGWE
               </h3>
             </Link>
@@ -209,23 +209,31 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-gray-800">
-            <p className="text-gray-400 text-sm">
-              © {currentYear} KOOGWE. {t('footer.allRightsReserved')}.
-            </p>
-            <div className="flex flex-wrap gap-6 text-sm justify-center md:justify-end">
-              <Link to="/mentions-legales" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                {t('footer.terms')}
-              </Link>
-              <Link to="/mentions-legales" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                {t('footer.privacy')}
-              </Link>
-              <Link to="/mentions-legales" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                {t('footer.legal')}
-              </Link>
-              <Link to="/mentions-legales" className="text-gray-400 hover:text-emerald-400 transition-colors">
-                {t('footer.rgpd')}
-              </Link>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 py-8 border-t border-gray-800">
+            <div className="flex items-center gap-4">
+              <img src={koogweLogo} alt="KOOGWE" className="w-20 h-20 rounded-2xl object-cover" />
+              <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                KOOGWE
+              </span>
+            </div>
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 w-full md:w-auto">
+              <p className="text-gray-400 text-sm">
+                © {currentYear} KOOGWE. {t('footer.allRightsReserved')}.
+              </p>
+              <div className="flex flex-wrap gap-6 text-sm justify-center md:justify-end">
+                <Link to="/mentions-legales" className="text-gray-400 hover:text-emerald-400 transition-colors">
+                  {t('footer.terms')}
+                </Link>
+                <Link to="/mentions-legales" className="text-gray-400 hover:text-emerald-400 transition-colors">
+                  {t('footer.privacy')}
+                </Link>
+                <Link to="/mentions-legales" className="text-gray-400 hover:text-emerald-400 transition-colors">
+                  {t('footer.legal')}
+                </Link>
+                <Link to="/mentions-legales" className="text-gray-400 hover:text-emerald-400 transition-colors">
+                  {t('footer.rgpd')}
+                </Link>
+              </div>
             </div>
           </div>
         </div>
