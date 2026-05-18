@@ -117,10 +117,14 @@ export const translations = {
       paddleDesc:
         'Ornée de motifs tembé colorés, cette pagaie symbolise le voyage, la transmission et la richesse culturelle des peuples bushinengués de Guyane.',
       paddleAlt: 'Pagaie traditionnelle ornée de motifs tembé colorés',
-      landscape: 'Rues guyanaises',
-      landscapeDesc:
+      streets: 'Rues guyanaises',
+      streetsDesc:
         'Cette image reflète le charme paisible des rues guyanaises entre nature tropicale et patrimoine architectural.',
-      landscapeAlt: 'Rues guyanaises entre nature tropicale et patrimoine architectural',
+      streetsAlt: 'Rues guyanaises entre nature tropicale et patrimoine architectural',
+      landscape: 'Paysage guyanais',
+      landscapeDesc:
+        'Ce paysage guyanais entre fleuve, sable et ciel nuageux évoque la beauté sauvage et apaisante de la Guyane.',
+      landscapeAlt: 'Paysage guyanais au bord du fleuve, entre sable et ciel nuageux',
     },
     download: {
       badge: 'Téléchargement',
@@ -396,10 +400,14 @@ export const translations = {
       paddleDesc:
         'Adorned with colorful tembé motifs, this paddle symbolizes travel, transmission, and the cultural richness of the Bushinengue peoples of French Guiana.',
       paddleAlt: 'Traditional paddle decorated with colorful tembé motifs',
-      landscape: 'Guyanese streets',
-      landscapeDesc:
+      streets: 'Guyanese streets',
+      streetsDesc:
         'This image reflects the peaceful charm of Guyanese streets between tropical nature and architectural heritage.',
-      landscapeAlt: 'Guyanese streets between tropical nature and architectural heritage',
+      streetsAlt: 'Guyanese streets between tropical nature and architectural heritage',
+      landscape: 'Guyanese landscape',
+      landscapeDesc:
+        'This Guyanese landscape between river, sand, and cloudy sky evokes the wild, soothing beauty of French Guiana.',
+      landscapeAlt: 'Guyanese riverside landscape between sand and cloudy sky',
     },
     download: {
       badge: 'Download',
@@ -698,10 +706,14 @@ export const translations = {
       paddleDesc:
         'Ornada com motivos tembé coloridos, esta pá simboliza a viagem, a transmissão e a riqueza cultural dos povos bushinengués da Guiana.',
       paddleAlt: 'Pá tradicional ornada com motivos tembé coloridos',
-      landscape: 'Ruas da Guiana',
-      landscapeDesc:
+      streets: 'Ruas da Guiana',
+      streetsDesc:
         'Esta imagem reflete o charme pacífico das ruas guianenses entre a natureza tropical e o património arquitetónico.',
-      landscapeAlt: 'Ruas guianenses entre natureza tropical e património arquitetónico',
+      streetsAlt: 'Ruas guianenses entre natureza tropical e património arquitetónico',
+      landscape: 'Paisagem da Guiana',
+      landscapeDesc:
+        'Esta paisagem guianense entre rio, areia e céu nublado evoca a beleza selvagem e apaziguadora da Guiana.',
+      landscapeAlt: 'Paisagem guianense à beira do rio, entre areia e céu nublado',
     },
     download: {
       badge: 'Download',
@@ -998,10 +1010,14 @@ export const translations = {
       paddleDesc:
         'Adornada con motivos tembé coloridos, esta pala simboliza el viaje, la transmisión y la riqueza cultural de los pueblos bushinengués de la Guayana.',
       paddleAlt: 'Pala tradicional adornada con motivos tembé coloridos',
-      landscape: 'Calles guyanesas',
-      landscapeDesc:
+      streets: 'Calles guyanesas',
+      streetsDesc:
         'Esta imagen refleja el encanto tranquilo de las calles guyanesas entre la naturaleza tropical y el patrimonio arquitectónico.',
-      landscapeAlt: 'Calles guyanesas entre naturaleza tropical y patrimonio arquitectónico',
+      streetsAlt: 'Calles guyanesas entre naturaleza tropical y patrimonio arquitectónico',
+      landscape: 'Paisaje guyanés',
+      landscapeDesc:
+        'Este paisaje guyanés entre río, arena y cielo nublado evoca la belleza salvaje y apacible de la Guayana.',
+      landscapeAlt: 'Paisaje guyanés a orillas del río, entre arena y cielo nublado',
     },
     download: {
       badge: 'Descarga',
@@ -1298,10 +1314,14 @@ export const translations = {
       paddleDesc:
         'Dekore ak motif tembé kolore, pagay sa a senbolize vwayaj, transmisyon ak richès kiltirèl pèp bushinengué Gwiyàn yo.',
       paddleAlt: 'Pagay tradisyonèl dekore ak motif tembé kolore',
-      landscape: 'Lari gwiyanyèz',
-      landscapeDesc:
+      streets: 'Lari gwiyanyèz',
+      streetsDesc:
         'Imaj sa a reflete charm trankil lari gwiyanyèz yo ant lanati twopikal ak eritaj achitekti.',
-      landscapeAlt: 'Lari gwiyanyèz ant lanati twopikal ak eritaj achitekti',
+      streetsAlt: 'Lari gwiyanyèz ant lanati twopikal ak eritaj achitekti',
+      landscape: 'Peyizaj gwiyanyèz',
+      landscapeDesc:
+        'Peyizaj gwiyanyèz sa a ant rivyè, sab ak syèl nwajye evoke bote sovaj ak trankil Guyàn lan.',
+      landscapeAlt: 'Peyizaj gwiyanyèz bò rivyè, ant sab ak syèl nwajye',
     },
     download: {
       badge: 'Telechajman',

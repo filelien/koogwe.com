@@ -35,7 +35,7 @@ export default function LanguageSelector({ isScrolled = false }: LanguageSelecto
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300 ${
+        className={`flex items-center gap-2 px-4 py-2.5 rounded-full text-base transition-all duration-300 ${
           isScrolled 
             ? 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600' 
             : 'bg-white/10 backdrop-blur-md text-white hover:bg-white/20 drop-shadow-md'

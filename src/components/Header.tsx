@@ -42,7 +42,7 @@ export default function Header() {
     : 'text-white hover:text-emerald-300 drop-shadow-md';
 
   const navPageClass = ({ isActive }: { isActive: boolean }) =>
-    `text-sm font-medium whitespace-nowrap transition-colors rounded-lg px-2 py-1.5 ${
+    `text-base font-medium whitespace-nowrap transition-colors rounded-lg px-3 py-2 ${
       navSolid
         ? isActive
           ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30'
@@ -59,55 +59,55 @@ export default function Header() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
             <Link
               to="/"
-              className={`flex items-center gap-2 text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent ${
+              className={`flex items-center gap-3 text-2xl sm:text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent ${
                 !navSolid ? 'drop-shadow-lg' : ''
               }`}
               onClick={() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
-              <img src={koogweLogo} alt="" className="w-9 h-9 rounded-full object-cover shadow-md ring-2 ring-emerald-500/30" />
+              <img src={koogweLogo} alt="" className="w-11 h-11 rounded-full object-cover shadow-md ring-2 ring-emerald-500/30" />
               KOOGWE
             </Link>
           </div>
 
-          <nav className="hidden lg:flex items-center gap-1 justify-end">
+          <nav className="hidden lg:flex items-center gap-1.5 justify-end">
             <button
               type="button"
               onClick={() => scrollToSection('features')}
-              className={`text-sm font-medium transition-colors whitespace-nowrap px-3 py-2 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-900/20 ${linkScrollClass}`}
+              className={`text-base font-medium transition-colors whitespace-nowrap px-4 py-2.5 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-900/20 ${linkScrollClass}`}
             >
               {t('header.features')}
             </button>
             <button
               type="button"
               onClick={() => scrollToSection('drivers')}
-              className={`text-sm font-medium transition-colors whitespace-nowrap px-3 py-2 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-900/20 ${linkScrollClass}`}
+              className={`text-base font-medium transition-colors whitespace-nowrap px-4 py-2.5 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-900/20 ${linkScrollClass}`}
             >
               {t('header.drivers')}
             </button>
             <button
               type="button"
               onClick={() => scrollToSection('partners')}
-              className={`text-sm font-medium transition-colors whitespace-nowrap px-3 py-2 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-900/20 ${linkScrollClass}`}
+              className={`text-base font-medium transition-colors whitespace-nowrap px-4 py-2.5 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-900/20 ${linkScrollClass}`}
             >
               {t('header.partners')}
             </button>
             <button
               type="button"
               onClick={() => scrollToSection('culture')}
-              className={`text-sm font-medium transition-colors whitespace-nowrap px-3 py-2 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-900/20 ${linkScrollClass}`}
+              className={`text-base font-medium transition-colors whitespace-nowrap px-4 py-2.5 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-900/20 ${linkScrollClass}`}
             >
               {t('header.culture')}
             </button>
             <button
               type="button"
               onClick={() => scrollToSection('coverage')}
-              className={`text-sm font-medium transition-colors whitespace-nowrap px-3 py-2 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-900/20 ${linkScrollClass}`}
+              className={`text-base font-medium transition-colors whitespace-nowrap px-4 py-2.5 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-900/20 ${linkScrollClass}`}
             >
               {t('header.coverage')}
             </button>
@@ -120,7 +120,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => scrollToSection('download')}
-              className="px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-full font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 whitespace-nowrap text-sm"
+              className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 whitespace-nowrap text-base"
             >
               {t('header.download')}
             </button>
@@ -140,7 +140,7 @@ export default function Header() {
             }`}
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
